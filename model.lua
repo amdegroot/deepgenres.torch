@@ -1,9 +1,7 @@
-require 'nn'
-
 
 function loadModel(pkg, numClasses, imgSize, phase)
   backend = pkg
-  batch = nil
+  local batch
   if phase == 'train' then
     batch = imgSize
   else

@@ -1,4 +1,3 @@
-
 local cfg = {
   genres = {'classical','country','hip-hop','rock','tropical-house'},
 

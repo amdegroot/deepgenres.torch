@@ -3,6 +3,7 @@ require 'paths'
 require 'nn'
 require 'utils'
 require 'sliceSpectrogram'
+
 local cfg = dofile "config.lua"
 local utils = paths.dofile('utils.lua')
 local Loader = torch.class('Loader')
@@ -13,7 +14,7 @@ local function getDatasetName(numFiles, sliceSize)
 end
 
 --TODO add ability to save/load val/test sets
-local function saveDataset(train_X, train_y)
+local function saveDataset(train_X, train_y, test_X, test_y)
   --Create path for dataset if not existing
   if not paths.dirp(cfg.dir.dataset) then
     status = pcall(function() return paths.mkdir(cfg.dir.dataset) end)
@@ -25,8 +26,10 @@ local function saveDataset(train_X, train_y)
     --SaveDataset
     print("[+] Saving dataset... ")
     name = getDatasetName(cfg.files, cfg.slice)
-    torch.save(cfg.dir.dataset.."train_X_"..name..".t7", train_X)
-    torch.save(cfg.dir.dataset.."train_y_"..name..".t7", train_y)
+    local train = {train_X,train_y}
+    local test = {test_X,test_y}
+    torch.save(cfg.dir.dataset.."train_data_"..name..".t7", train)
+    torch.save(cfg.dir.dataset.."test_data_"..name..".t7", test)
     print("    Dataset saved! ✅💾")
 end
 
@@ -41,14 +44,8 @@ local function createDatasetFromSlices(genreSz, genres, sliceSz, slicePath, valR
       --Get slices in genre subfolder
       filenames = utils.slice(paths.files(slicePath..genre, '.png'),1,genreSz,1)
 
-      -- Randomize file selection for this genre
-      --TODO: shuffle(filenames)
-
       --Add data (X,y)
       for i,fn in pairs(filenames) do
-        --print('hi')
-        -- print(i)
-        -- print(label)
         if i > 250 then break end -- only want the first genreSz songs
         img = utils.getImageData(slicePath..genre.."/"..fn, sliceSz)
         data[idx] = img
@@ -57,41 +54,22 @@ local function createDatasetFromSlices(genreSz, genres, sliceSz, slicePath, valR
         idx = idx + 1
       end
     end
-    --TODO:Shuffle data
     -- Set sizes
-    -- indexes = torch.Tensor({2,1,3}):long()
-    -- input = torch.rand(5,5)
-    -- selected = input:index(1,indexes)
-
     val_ = utils.toInt(num*valRatio)
     test_ = utils.toInt(num*testRatio)
     train_ = num-(val_+test_)
-    shuffle = torch.randperm(train_):long()
-    -- input = trainData.data[shuffle[i]]
-    -- Split train/val/test data
-    -- local shuffle = torch.randperm(data:size(1))
+    --Shuffle data
+    shuffle = torch.randperm(data:size(1)):long()
+    shuffledData = data:index(1,shuffle):contiguous()
+    shuffledLabels = labels:index(1,shuffle):contiguous()
 
-
-        -- shuffledData[idx] = data[shuffle[i]]
-        -- shuffledLabels[idx] = labels[shuffle[i]]
-        -- idx = idx + 1
-
--- :index(1,shuffle)
--- :index(1,shuffle)
-    train_X = data[{{1,train_},{},{}}]
-    -- train_y = labels[{{1,train_},{}}]
-    train_y = labels[{{1,train_}}]
-
-    train_X = train_X:index(1,shuffle):contiguous()
-    train_y = train_y:index(1,shuffle):contiguous()
-    -- print(train_y:size())
-    -- for j =1, train_y:size(1) do
-    --   print(train_y[j])
-    -- end
+    train_X = shuffledData[{{1,train_},{},{}}]:clone()
+    train_y = shuffledLabels[{{1,train_}}]:clone()
+    test_X = shuffledData[{{train_,train_+val_},{},{}}]:clone()
+    test_y = shuffledLabels[{{train_,train_+val_}}]:clone()
     print("Dataset created! ✅")
     --Save
-    saveDataset(train_X,train_y)
-    -- saveDataset(train_X, train_y, validation_X, validation_y, test_X, test_y, nbPerGenre, genres, sliceSize)
+    saveDataset(train_X,train_y,test_X,test_y)
     return train_X,train_y
 end
 
@@ -110,28 +88,25 @@ end
 
 -- Create a dataset name with num samples per genre and slice size
 
---TODO add ability to save/load val/test sets
+--TODO add ability to save/load val sets
 local function loadDataset(mode)
     -- Load existing data
     name = getDatasetName(cfg.files, cfg.slice)
     if mode == "train" then
-        print("[+] Loading training and validation datasets... ")
-        train_X = torch.load(cfg.dir.dataset.."train_X_"..name..".t7")
-        train_y = torch.load(cfg.dir.dataset.."train_y_"..name..".t7")
-        -- validation_X = pickle.load(open("{}validation_X_{}.p".format(datasetPath,datasetName), "rb" ))
-        -- validation_y = pickle.load(open("{}validation_y_{}.p".format(datasetPath,datasetName), "rb" ))
-        print("--> Training and validation datasets loaded! ✅")
-        return train_X,train_y
+      print("[+] Loading training and validation datasets... ")
+      train_data = torch.load(cfg.dir.dataset.."train_data_"..name..".t7")
+      print("--> Training and validation datasets loaded! ✅")
+      return train_data[1], train_data[2]
+    elseif mode == 'test' then
+      print("[+] Loading testing dataset... ")
+      test_data = torch.load(cfg.dir.dataset.."test_data_"..name..".t7")
+      print("--> Testing dataset loaded! ✅")
+      return test_data[1], test_data[2]
+    else
+      print("Not implemented yet!")
+      return
     end
-    -- else
-    --   print("[+] Loading testing dataset... ")
-    --   test_X = pickle.load(open("{}test_X_{}.p".format(datasetPath,datasetName), "rb" ))
-    --   test_y = pickle.load(open("{}test_y_{}.p".format(datasetPath,datasetName), "rb" ))
-    --   print("    Testing dataset loaded! ✅")
-    --   return test_X, test_y
 end
-
-
 
 
 

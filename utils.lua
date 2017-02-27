@@ -1,8 +1,5 @@
-require 'torch'
 require 'audio'
 require 'image'
-require 'torch'
-require 'nn'
 --local cfg = dofile 'config'
 
 local function getProcessedData(img, imageSize)
@@ -60,9 +57,9 @@ local function isMono(songFile)
   return song:size(2)==1
 end
 
-local function splitString(s, delimiter)
+local function splitString(str, delimiter)
     result = {};
-    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+    for match in (str..delimiter):gmatch("(.-)"..delimiter) do
         table.insert(result, match);
     end
     return result;

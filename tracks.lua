@@ -70,7 +70,6 @@ end
 
 
 local function createSpectrogramsFromAudio(cfg)
-
     genres = {}
   	--Create path if not existing
   	if not paths.dirp(cfg.dir.spec) then
@@ -99,7 +98,6 @@ local function createSpectrogramsFromAudio(cfg)
 end
 
 -- Whole pipeline .mp3 -> .png slices
-
 local function sliceAudio(cfg)
   print('Generating spectrograms...')
   createSpectrogramsFromAudio(cfg)
@@ -109,7 +107,7 @@ local function sliceAudio(cfg)
   print('Slices created!')
 end
 
-local songLoader = {}
-songLoader.sliceAudio = sliceAudio
-songLoader.labelGenres = labelGenres
-return songLoader
+local tracks = {}
+tracks.sliceAudio = sliceAudio
+tracks.labelGenres = labelGenres
+return tracks

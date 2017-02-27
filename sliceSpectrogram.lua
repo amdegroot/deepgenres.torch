@@ -6,10 +6,9 @@ local cfg = paths.dofile('config.lua')
 local limitPer = 1000
 local currentNum = 0
 local genre
- -- Creates slices from spectrogram
--- TODO Improvement - Make sure we don't miss the end of the song
-local function sliceSpectrogram(fn, size)
 
+ -- Creates slices from spectrogram
+local function sliceSpectrogram(fn, size)
 	if currentNum > limitPer then
 		local nextGenre = utils.split(paths.basename(fn),"_")[1]
 		if not (nextGenre == genre) then
@@ -17,7 +16,7 @@ local function sliceSpectrogram(fn, size)
 			currentNum = 0
 			print("Moving to next genre...")
 		end
-		print("skipping")
+		print("Skipping extra track...")
 		goto next
 	end
 	-- Load the full spectrogram
@@ -40,7 +39,7 @@ local function sliceSpectrogram(fn, size)
 		local start = (i*size)+1
 		local status,slice = pcall(function() return image.crop(img,start,1,start+size,size+1)end)
 		if not status then goto next end
-		--local ext = paths.extname(fn)
+		local ext = paths.extname(fn)
 		local base_fn = paths.basename(fn, ext)
 		local numExt = utils.splitString(base_fn,"_")[2]
 		local num = utils.splitString(numExt,".png")[1]
@@ -53,7 +52,7 @@ end
 
 -- Slices all spectrograms
 local function createSlices(size)
-	genre = "classical" 	-- eg. tropical-house_12.png
+	genre = cfg.genres[1]	-- first genre to add e.g. tropical-house
 	for file in paths.iterfiles(cfg.dir.spec) do
 		print("Slicing :"..file)
 		sliceSpectrogram(file,size)
