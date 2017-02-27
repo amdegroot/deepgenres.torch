@@ -32,8 +32,8 @@ else
   backend = cudnn
 end
 local cfg = paths.dofile(opt.config)
-local sliceAudio = paths.dofile('tracks.lua').sliceAudio
-local rename = paths.dofile('tracks.lua').labelGenres
+local sliceAudio = paths.dofile('data.lua').sliceAudio
+local rename = paths.dofile('data.lua').labelGenres
 --utils = paths.dofile('utils.lua')
 
 function train(model, lr, createSpectrograms)

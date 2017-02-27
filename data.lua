@@ -107,7 +107,7 @@ local function sliceAudio(cfg)
   print('Slices created!')
 end
 
-local tracks = {}
-tracks.sliceAudio = sliceAudio
-tracks.labelGenres = labelGenres
-return tracks
+local data = {}
+data.sliceAudio = sliceAudio
+data.labelGenres = labelGenres
+return data
