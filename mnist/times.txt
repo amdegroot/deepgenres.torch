@@ -1,0 +1,17 @@
+-rw-r--r-- 1 brownel3 200513  910 Feb 20 00:44 e30_m100_r30.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513  908 Feb 20 00:50 e30_m100_r3.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513  912 Feb 20 01:53 e30_m10_r0.001_l784-100-10.txt
+-rw-r--r-- 1 brownel3 200513  910 Feb 20 01:39 e30_m10_r0.01_l784-100-10.txt
+-rw-r--r-- 1 brownel3 200513  880 Feb 20 01:48 e30_m10_r100.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513  901 Feb 19 23:39 e30_m10_r10.0_l784-10.txt
+-rw-r--r-- 1 brownel3 200513  908 Feb 20 00:56 e30_m10_r30.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513  908 Feb 20 01:17 e30_m10_r3.0_l784-100-10.txt
+-rw-r--r-- 1 brownel3 200513  915 Feb 20 02:08 e30_m10_r3.0_l784-100-50-10.txt
+-rw-r--r-- 1 brownel3 200513  899 Feb 19 23:11 e30_m10_r3.0_l784-10.txt
+-rw-r--r-- 1 brownel3 200513  906 Feb 19 23:58 e30_m10_r3.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513  913 Feb 20 01:51 e30_m10_r3.0_l784-50-10-10.txt
+-rw-r--r-- 1 brownel3 200513  913 Feb 20 01:47 e30_m10_r3.0_l784-50-30-10.txt
+-rw-r--r-- 1 brownel3 200513  904 Feb 20 01:18 e30_m1_r3.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513 1598 Feb 20 01:58 e60_m10_r0.02_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513 1596 Feb 20 01:54 e60_m10_r3.0_l784-30-10.txt
+-rw-r--r-- 1 brownel3 200513 1594 Feb 20 02:07 e60_m1_r3.0_l784-30-10.txt
