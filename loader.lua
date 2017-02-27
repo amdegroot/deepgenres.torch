@@ -31,9 +31,10 @@ local function saveDataset(train_X, train_y)
 end
 
 local function createDatasetFromSlices(genreSz, genres, sliceSz, slicePath, valRatio, testRatio)
-  local num = #genres*genreSz
+  local num = 250*#genres --#genres*genreSz
   local data = torch.Tensor(num,sliceSz,sliceSz)
-  local labels = torch.Tensor(num,#genres):zero()
+  -- local labels = torch.Tensor(num,#genres):zero()
+  local labels = torch.Tensor(num):zero()
   idx = 1
   for label,genre in pairs(genres) do
       print("-> Adding ...", genre)
@@ -46,12 +47,13 @@ local function createDatasetFromSlices(genreSz, genres, sliceSz, slicePath, valR
       --Add data (X,y)
       for i,fn in pairs(filenames) do
         --print('hi')
-        print(i)
-        print(label)
+        -- print(i)
+        -- print(label)
         if i > 250 then break end -- only want the first genreSz songs
         img = utils.getImageData(slicePath..genre.."/"..fn, sliceSz)
         data[idx] = img
-        labels[{{idx},{label}}]= 1
+        -- labels[idx][label]= 1
+        labels[idx] = label
         idx = idx + 1
       end
     end
@@ -60,26 +62,32 @@ local function createDatasetFromSlices(genreSz, genres, sliceSz, slicePath, valR
     -- indexes = torch.Tensor({2,1,3}):long()
     -- input = torch.rand(5,5)
     -- selected = input:index(1,indexes)
+
     val_ = utils.toInt(num*valRatio)
     test_ = utils.toInt(num*testRatio)
     train_ = num-(val_+test_)
-    -- shuffle = torch.randperm(trsize)
+    shuffle = torch.randperm(train_):long()
     -- input = trainData.data[shuffle[i]]
     -- Split train/val/test data
     -- local shuffle = torch.randperm(data:size(1))
-    -- local idx = 1
-    -- for i = 1,data:size(1) do
-    --     data[idx] = data[{shuffle[i]}]
-    --     labels[idx] = labels[{shuffle[i]}]
-    --     idx = idx + 1
-    --  end
 
+
+        -- shuffledData[idx] = data[shuffle[i]]
+        -- shuffledLabels[idx] = labels[shuffle[i]]
+        -- idx = idx + 1
+
+-- :index(1,shuffle)
+-- :index(1,shuffle)
     train_X = data[{{1,train_},{},{}}]
-    train_y = labels[{{1,train_},{}}]
-    print(train_y:size())
-    for j =1, train_y:size(1) do
-      print(train_y[j])
-    end
+    -- train_y = labels[{{1,train_},{}}]
+    train_y = labels[{{1,train_}}]
+
+    train_X = train_X:index(1,shuffle):contiguous()
+    train_y = train_y:index(1,shuffle):contiguous()
+    -- print(train_y:size())
+    -- for j =1, train_y:size(1) do
+    --   print(train_y[j])
+    -- end
     print("Dataset created! ✅")
     --Save
     saveDataset(train_X,train_y)

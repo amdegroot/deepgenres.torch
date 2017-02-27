@@ -3,7 +3,7 @@ local cfg = {
   genres = {'classical','country','hip-hop','rock','tropical-house'},
 
 
-  files = 1000, -- each of these is a small slice
+  files = 250, -- each of these is a small slice
   valRatio = 0.3,
   testRatio = 0.1,
 
