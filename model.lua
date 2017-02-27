@@ -9,7 +9,7 @@ function loadModel(pkg, numClasses, imgSize, phase)
   end
 
 
-  -- Input of shape batch X imgSize X imgSize
+  -- Input of size: batch X imgSize X imgSize
   -- Torch automatically infers batch size
   model = backend.Sequential()
   model:add(backend.SpatialConvolution(batch,64,3,3,1,1,1,1))

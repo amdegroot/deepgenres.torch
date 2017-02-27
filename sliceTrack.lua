@@ -60,6 +60,6 @@ local function createSlices(size)
 
 end
 
-local sliceSpectrogram = {}
-sliceSpectrogram.createSlices = createSlices
-return sliceSpectrogram
+local sliceTrack = {}
+sliceTrack.createSlices = createSlices
+return sliceTrack

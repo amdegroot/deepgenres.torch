@@ -2,7 +2,7 @@ require 'torch'
 require 'paths'
 require 'nn'
 require 'utils'
-require 'sliceSpectrogram'
+require 'sliceTrack'
 
 local cfg = dofile "config.lua"
 local utils = paths.dofile('utils.lua')
