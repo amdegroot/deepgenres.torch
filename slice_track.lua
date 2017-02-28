@@ -3,13 +3,13 @@ require 'image'
 require 'paths'
 local utils = paths.dofile('utils.lua')
 local cfg = paths.dofile('config.lua')
-local limitPer = 1000
+local limitPer = cfg.slicesPerGenre
 local currentNum = 0
 local genre
 
  -- Creates slices from spectrogram
 local function sliceSpectrogram(fn, size)
-	if currentNum > limitPer then
+	if currentNum > limitPer then -- skip tracks if already reached limit per genre
 		local nextGenre = utils.split(paths.basename(fn),"_")[1]
 		if not (nextGenre == genre) then
 			genre = nextGenre
@@ -27,7 +27,7 @@ local function sliceSpectrogram(fn, size)
 	local height = img:size()[1]
 	local numSamples = math.floor(width/size)-1
 
-	-- Create path if not existing
+	-- Create directory to hold slices if there isn't one already
 	local slicePath = cfg.dir.slices..genre
 	if not paths.dir(slicePath) then
 		status = pcall(function () return paths.mkdir(slicePath) end)
@@ -47,7 +47,7 @@ local function sliceSpectrogram(fn, size)
 		image.save(slice_fn, slice)  -- TODO add a check here
 		currentNum = currentNum + 1
 	end
-	::next::
+	::next:: -- Go here if skipping track
 end
 
 -- Slices all spectrograms
@@ -60,6 +60,6 @@ local function createSlices(size)
 
 end
 
-local sliceTrack = {}
-sliceTrack.createSlices = createSlices
-return sliceTrack
+local slice_track = {}
+slice_track.createSlices = createSlices
+return slice_track

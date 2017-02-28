@@ -4,7 +4,7 @@ require 'os'
 require 'image'
 require 'audio'
 local utils = paths.dofile('utils.lua')
-local createSlices = paths.dofile('sliceTrack.lua').createSlices
+local createSlices = paths.dofile('slice_track.lua').createSlices
 local cfg = paths.dofile('config.lua')
 
 sliceSz = 128 -- tweak this for different freq range

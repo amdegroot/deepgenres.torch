@@ -2,9 +2,9 @@ require 'torch'
 require 'paths'
 require 'nn'
 require 'utils'
-require 'sliceTrack'
+require 'slice_track'
 
-local cfg = dofile "config.lua"
+local cfg = paths.dofile('config.lua')
 local utils = paths.dofile('utils.lua')
 local Loader = torch.class('Loader')
 
