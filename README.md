@@ -1,1 +1,1 @@
-# deep_genres.torch
+# deepgenres.torch
