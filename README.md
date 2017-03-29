@@ -57,4 +57,4 @@ git clone git://git.code.sf.net/p/sox/code sox
 * Keep in mind the model is able to make these predictions from just ~2 second audio clips, so that's pretty cool!
  
 ## References
-All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).  
+All of the above images can be found on Julien Despois' really cool [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194), which can also be used as a reference for more in-depth details. This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).  
