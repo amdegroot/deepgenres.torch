@@ -41,10 +41,11 @@ git clone git://git.code.sf.net/p/sox/code sox
 ## Usage
 To tweak the configuration to your setup, you may have to change some of the opts inside `config.lua`, `train.lua`, or `test.lua`.
 Since we only needed to train for 20 epochs to get impressive accuracy (~95%), the model is saved at each epoch by default.  Again, all details like this can be changed to user preference by editing the files listed above.
+To run on an Nvidia GPU, set the -backend flag to 'cudnn' rather than the default 'nn'. 
 
 ### Training 
 run  `th train.lua`.
-Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag createSpectrograms to false.
+Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag -createSpectrograms to false.
 
 ### Testing 
 To test the accuracy of a trained model run `th test.lua`. 
@@ -58,4 +59,3 @@ that's pretty cool!
  
 ## References
 All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).  
-Note: The architecture in this repo is slightly different, however, as (along with several other changes) ReLU was used instead of ELU, and SGD was used to optimize instead of RMSProp.
