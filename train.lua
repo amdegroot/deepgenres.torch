@@ -20,7 +20,8 @@ cmd:option('-learningRate', 0.001, 'Training learning rate')
 cmd:option('-classes', 5, 'Number of genres to classify')
 cmd:option('-config', 'config.lua', 'Configuration file containing architecture params')
 cmd:option('-batchSize', 1, 'Batch size in training')
--- cmd:option('-numHidden', 6, 'Number of hidden layers')
+
+
 cmd:text()
 local opt = cmd:parse(arg)
 print(opt)
@@ -34,10 +35,8 @@ end
 local cfg = paths.dofile(opt.config)
 local sliceAudio = paths.dofile('data.lua').sliceAudio
 local rename = paths.dofile('data.lua').labelGenres
---utils = paths.dofile('utils.lua')
 
 function train(model, lr, createSpectrograms)
-  --if rename then rename(cfg.dir.data) end
   if createSpectrograms then sliceAudio(cfg) end
 
   print("Preparing dataset...")
@@ -76,7 +75,6 @@ function train(model, lr, createSpectrograms)
         local _, fs = optim.rmsprop(feval, x, optimState)
         currentLoss = currentLoss + fs[1]
         print(currentLoss)
-        --xlua.progress(j, self.indexer.nbOfBatches)
         averageLoss = averageLoss + currentLoss
     end
     averageLoss = averageLoss / X:size(1)
