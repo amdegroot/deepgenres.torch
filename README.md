@@ -29,21 +29,25 @@ A deep learning method for automatically labeling songs by genre using Torch.  T
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/sliced_spec_example.png"/>
  
 ## Full Pipeline
-Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag createSpectrograms to false.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/pipeline.png"/>
  
 ## Usage
-To tweak the configuration to your setup, you may have to change some of the opts inside either of the following:
+To tweak the configuration to your setup, you may have to change some of the opts inside `config.lua`, `train.lua`, or `test.lua`.
+Since we only needed to train for 20 epochs to get impressive accuracy (~95%), the model is saved at each epoch by default.  Again, all details like this can be changed to user preference by editing the files listed above.
+
 ### Training 
-run  `train.lua` 
+run  `th train.lua`.
+Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag createSpectrograms to false.
+
 ### Testing 
-To test the accuracy of a trained model run `test.lua`.  
+To test the accuracy of a trained model run `th test.lua`. 
+This will evaluate the pre-trained model on the evaluation set that was set aside and print the accuracy for each genre as well as the overall accuracy. 
 
 ### Results
 Training on Soundcloud sets containing the genres metioned above (Tropical-House etc.) we were able to achieve an overall 
 classification accuracy of 95%.  
 Keep in mind the model is able to make these predictions from just ~2 second audio clips, so 
-that's pretty cool.
+that's pretty cool!
  
 ## References
 All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).
