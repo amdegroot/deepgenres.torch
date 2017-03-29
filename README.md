@@ -22,12 +22,15 @@ A deep learning method for automatically labeling songs by genre using Torch.  T
           * Currently the config file is set up for Classical, Country, Hip-Hop, Rock, and (of course) Tropical-House.
         
  
- 2. Next, we convert all of our songs to spectrograms so that they can be processed by the Conv-Net in a way that is similar to normal images.
+ 2. Next, using sox, we combine the two stereo channels to mono, and convert all of our songs to spectrograms so that they can be processed by the Conv-Net in a way that is similar to normal images.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/spectrogram_example.png"/>
  
  3. In order to make the most of the data we have, we slice-up these spectrograms to produce several small ~2 second clips that we can train on and treat as individual instances.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/sliced_spec_example.png"/>
-
+ 
+## Full Pipeline
+ <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/pipeline.png"/>
+ 
 ## Usage
 To tweak the configuration to your setup, you may have to change some of the opts inside either of the following:
 ### Training 
