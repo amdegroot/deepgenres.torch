@@ -20,6 +20,7 @@ cmd:option('-learningRate', 0.001, 'Training learning rate')
 cmd:option('-classes', 5, 'Number of genres to classify')
 cmd:option('-config', 'config.lua', 'Configuration file containing architecture params')
 cmd:option('-batchSize', 1, 'Batch size in training')
+cmd:option('-createSpectrograms', true, 'Create spectrograms and slice them if this has not already been done.')
 
 
 cmd:text()
@@ -86,4 +87,4 @@ end
 
 local modelFactory = paths.dofile(opt.modelFactory)
 local model = modelFactory(backend, opt.classes, opt.batchSize, opt.mode)
-train(model, 0.001, false)
+train(model, 0.001, opt.createSpectrograms)
