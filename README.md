@@ -2,8 +2,8 @@
 A deep learning method for automatically labeling songs by genre using Torch.  The primary reason for creating this was to become more familiar with audio deep learning.    
 
 ## Requirements
-1. Make sure to install [Torch](http://torch.ch/) by following the instructions on the website. 
-2. You also need [sox](http://sox.sourceforge.net/). If you don't already have it, then run:
+* Make sure to install [Torch](http://torch.ch/) by following the instructions on the website. 
+* You also need [sox](http://sox.sourceforge.net/). If you don't already have it, then run:
 ```Shell
 git clone git://git.code.sf.net/p/sox/code sox
 ```
@@ -45,18 +45,16 @@ git clone git://git.code.sf.net/p/sox/code sox
 * Note: To run on an Nvidia GPU, set the -backend flag to 'cudnn' rather than the default 'nn'. 
 
 ### Training 
-run  `th train.lua`.
-Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag -createSpectrograms to false.
+* run  `th train.lua`.
+* Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag -createSpectrograms to false.
 
 ### Testing 
-To test the accuracy of a trained model run `th test.lua`. 
-This will evaluate the pre-trained model on the evaluation set that was set aside and print the accuracy for each genre as well as the overall accuracy. 
+* To test the accuracy of a trained model run `th test.lua`. 
+* This will evaluate the pre-trained model on the evaluation set that was set aside and print the accuracy for each genre as well as the overall accuracy. 
 
 ### Results
-Training on Soundcloud sets containing the genres metioned above (Tropical-House etc.) we were able to achieve an overall 
-classification accuracy of 95%.  
-Keep in mind the model is able to make these predictions from just ~2 second audio clips, so 
-that's pretty cool!
+* Training on Soundcloud sets containing the genres metioned above (Tropical-House etc.) we were able to achieve an overall classification accuracy of 95%.  
+* Keep in mind the model is able to make these predictions from just ~2 second audio clips, so that's pretty cool!
  
 ## References
 All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).  
