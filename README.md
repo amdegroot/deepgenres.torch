@@ -1,5 +1,5 @@
 # deepgenres.torch
-A deep learning method for automatically labeling songs by genre using Torch.  The primary reason for creating this was to become more familiar with the audio field within deep learning.    
+A deep learning method for automatically labeling songs by genre using Torch.  The primary reason for creating this was to become more familiar with audio deep learning.    
 
 ## Architecture
 <img align="center" src = "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/network.png" height = 200/>
