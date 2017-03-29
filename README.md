@@ -17,7 +17,7 @@ A deep learning method for automatically labeling songs by genre using Torch.  T
       ```Shell
       soundscrape https://soundcloud.com/full-url-to-the-selected-genre-set
       ```
-      4.  You should have a separate folder containing the tracks for each genre inside the Data folder. 
+      4.  You should create a separate folder containing the tracks for each genre inside the Data folder. 
       5.  Repeat this process for each genre of your choice and then update config.lua to support the genres you've selected.
           * Currently the config file is set up for Classical, Country, Hip-Hop, Rock, and (of course) Tropical-House.
         
