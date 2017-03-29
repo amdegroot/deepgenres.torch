@@ -1,6 +1,13 @@
 # deepgenres.torch
 A deep learning method for automatically labeling songs by genre using Torch.  The primary reason for creating this was to become more familiar with audio deep learning.    
 
+## Requirements
+1. Make sure to install [Torch](http://torch.ch/) by following the instructions on the website. 
+2. You also need [sox](http://sox.sourceforge.net/). If you don't already have it, then run:
+```Shell
+git clone git://git.code.sf.net/p/sox/code sox
+```
+
 ## Architecture
 <img align="center" src = "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/network.png" height = 200/>
 
@@ -50,4 +57,5 @@ Keep in mind the model is able to make these predictions from just ~2 second aud
 that's pretty cool!
  
 ## References
-All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).
+All of the above images can be found on Julien Despois' [blog post](https://chatbotslife.com/finding-the-genre-of-a-song-with-deep-learning-da8f59a61194).  This code is largely based off of his original TensorFlow implementation which can be found [here](https://github.com/despoisj/DeepAudioClassification).  
+Note: The architecture in this repo is slightly different, however, as (along with several other changes) ReLU was used instead of ELU, and SGD was used to optimize instead of RMSProp.
