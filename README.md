@@ -29,6 +29,7 @@ A deep learning method for automatically labeling songs by genre using Torch.  T
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/sliced_spec_example.png"/>
  
 ## Full Pipeline
+Note: Conversion to mono, conversion to spectrogram, and spectrogram slicing is all done by default when running `th train.lua`.  This can be changed for subsequent runs by changing the flag createSpectrograms to false.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/pipeline.png"/>
  
 ## Usage
