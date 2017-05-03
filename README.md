@@ -11,9 +11,11 @@ git clone git://git.code.sf.net/p/sox/code sox
 ## Architecture
 <img align="center" src = "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/network.png" height = 200/>
 
-## Pre-Processing
- 1. First, because music from SoundCloud is free, we take advantage of a pretty sweet SoundCloud song scraper called [SoundScrape](https://github.com/Miserlou/SoundScrape), which you can install with `pip install soundscrape`. 
+## Data Collection
+First, because music from SoundCloud is free, we take advantage of a pretty sweet SoundCloud song scraper called [SoundScrape](https://github.com/Miserlou/SoundScrape), which you can install with `pip install soundscrape`. 
+
  To give you an example of how to install songs by genre:
+ 
       1. Simply type the genre into the SoundCloud search bar online, select Playlists on the sidebar and pick a set. 
       2.  Navigate to one level outside this repo and open up a terminal to create a Data folder (we assume you download all sets there).
       ```Shell
@@ -28,11 +30,11 @@ git clone git://git.code.sf.net/p/sox/code sox
       5.  Repeat this process for each genre of your choice and then update config.lua to support the genres you've selected.
           * Currently the config file is set up for Classical, Country, Hip-Hop, Rock, and (of course) Tropical-House.
         
- 
- 2. Next, using sox, we combine the two stereo channels to mono, and convert all of our songs to spectrograms so that they can be processed by the Conv-Net in a way that is similar to normal images.
+ ## Pre-Processing
+ Next, using sox, we combine the two stereo channels to mono, and convert all of our songs to spectrograms so that they can be processed by the Conv-Net in a way that is similar to normal images.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/spectrogram_example.png"/>
  
- 3. In order to make the most of the data we have, we slice-up these spectrograms to produce several small ~2 second clips that we can train on and treat as individual instances.
+ In order to make the most of the data we have, we slice-up these spectrograms to produce several small ~2 second clips that we can train on and treat as individual instances.
  <img align="center" src= "https://github.com/amdegroot/deepgenres.torch/blob/master/doc/sliced_spec_example.png"/>
  
 ## Full Pipeline
