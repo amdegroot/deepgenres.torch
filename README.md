@@ -16,19 +16,19 @@ First, because music from SoundCloud is free, we take advantage of a pretty swee
 
  To give you an example of how to install songs by genre:
  
-      1. Simply type the genre into the SoundCloud search bar online, select Playlists on the sidebar and pick a set. 
-      2.  Navigate to one level outside this repo and open up a terminal to create a Data folder (we assume you download all sets there).
-      ```Shell
-      mkdir Data
-      cd Data
-      ```
-      3.  Then Open up a terminal and download each set with SoundScrape:
-      ```Shell
-      soundscrape https://soundcloud.com/full-url-to-the-selected-genre-set
-      ```
-      4.  You should create a separate folder containing the tracks for each genre inside the Data folder. 
-      5.  Repeat this process for each genre of your choice and then update config.lua to support the genres you've selected.
-          * Currently the config file is set up for Classical, Country, Hip-Hop, Rock, and (of course) Tropical-House.
+  1. Simply type the genre into the SoundCloud search bar online, select Playlists on the sidebar and pick a set. 
+  2.  Navigate to one level outside this repo and open up a terminal to create a Data folder (we assume you download all sets there).
+  ```Shell
+  mkdir Data
+  cd Data
+  ```
+  3.  Then Open up a terminal and download each set with SoundScrape:
+  ```Shell
+  soundscrape https://soundcloud.com/full-url-to-the-selected-genre-set
+  ```
+  4.  You should create a separate folder containing the tracks for each genre inside the Data folder. 
+  5.  Repeat this process for each genre of your choice and then update config.lua to support the genres you've selected.
+      * Currently the config file is set up for Classical, Country, Hip-Hop, Rock, and (of course) Tropical-House.
         
  ## Pre-Processing
  Next, using sox, we combine the two stereo channels to mono, and convert all of our songs to spectrograms so that they can be processed by the Conv-Net in a way that is similar to normal images.
